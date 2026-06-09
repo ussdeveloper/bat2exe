@@ -1,7 +1,7 @@
 # bat2exe
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)
 
 **bat2exe** converts Windows `.bat` batch files with meta tags into standalone `.exe` executables. No runtime dependencies — the resulting `.exe` is a self-contained Go program that runs on any Windows system.
 
@@ -13,6 +13,7 @@
 - 📋 **Audit** — `--audit` flag shows exactly what's inside any compiled `.exe`
 - 🔍 **Verbose** — `--verbose` flag shows step-by-step execution
 - 🖼️ **Custom icon** embedded in every build
+- 🎨 **Icon Picker** (`--pick-icon`) — choose from **120+ Material Design Icons** with custom color in your browser
 - 📦 **Installer** with context menu integration (right-click `.bat` → Convert to EXE)
 - ⚡ **No runtime** — standalone executable, zero dependencies
 
@@ -49,6 +50,26 @@ Meta tags must be on their own line:
 <<<parameter port default:8080>>>
 echo "Starting server on %server%:%port%"
 ```
+
+## Interactive Icon Picker (`--pick-icon`)
+
+The `--pick-icon` flag opens a beautiful web UI in your browser where you can:
+
+1. **Browse** 120+ Material Design Icons with live search
+2. **Pick** an icon by clicking on it
+3. **Choose** a color from presets or use the color picker
+4. Click **Apply** — the compiled `.exe` gets your custom icon!
+
+```bash
+# Convert with icon picker
+bat2exe -input script.bat --pick-icon
+
+# Or with custom output name
+bat2exe -input script.bat -output app.exe --pick-icon
+```
+
+> **Note**: Requires `go-winres` for icon embedding.
+> Install: `go install github.com/tc-hib/go-winres@latest`
 
 ## Generated `.exe` Flags
 

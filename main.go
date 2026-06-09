@@ -25,13 +25,14 @@ type ParsedFile struct {
 	Params    []MetaTag
 }
 
-const version = "1.1.0"
+const version = "1.2.0"
 
 func main() {
 	input := flag.String("input", "", "Path to .bat file")
 	output := flag.String("output", "", "Output .exe path (optional)")
 	printOnly := flag.Bool("print", false, "Only print generated Go code")
 	showVersion := flag.Bool("version", false, "Show version")
+	pickIcon := flag.Bool("pick-icon", false, "Open icon picker to choose MDI icon and color for the compiled exe")
 	flag.Parse()
 
 	if *showVersion {
@@ -106,6 +107,41 @@ func main() {
 	if err := os.WriteFile(modFile, []byte(modContent), 0644); err != nil {
 		fmt.Fprintf(os.Stderr, "go.mod write error: %v\n", err)
 		os.Exit(1)
+	}
+
+	// If --pick-icon, show icon picker and generate custom icon
+	customIconPath := ""
+	if *pickIcon {
+		fmt.Println("🎨 Opening icon picker...")
+		result, err := pickIconAndColor()
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Icon picker error: %v\n", err)
+			os.Exit(1)
+		}
+		if result.Canceled {
+			fmt.Println("Icon selection canceled. Using default icon.")
+		} else {
+			fmt.Printf("✅ Selected: %s (color: %s)\n", result.IconName, result.ColorHex)
+			fmt.Println("   Generating custom icon...")
+
+			// Generate icon PNG
+			iconPath, err := generateCustomIcon(result.IconName, result.ColorHex, tmpDir)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Icon generation error: %v\n", err)
+				os.Exit(1)
+			}
+			customIconPath = iconPath
+
+			// Run go-winres to create .syso files
+			fmt.Println("   Embedding icon...")
+			if err := runGoWinres(customIconPath, tmpDir); err != nil {
+				fmt.Fprintf(os.Stderr, "⚠️  go-winres not found or failed. Icon won't be embedded.\n")
+				fmt.Fprintf(os.Stderr, "   Install with: go install github.com/tc-hib/go-winres@latest\n")
+				customIconPath = ""
+			} else {
+				fmt.Println("   ✅ Icon embedded successfully!")
+			}
+		}
 	}
 
 	// Compile to .exe (console app, no windowsgui)
