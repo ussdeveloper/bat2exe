@@ -2,7 +2,7 @@
 ; Inno Setup Script
 
 #define MyAppName "bat2exe"
-#define MyAppVersion "1.1.0"
+#define MyAppVersion "1.2.0"
 #define MyAppPublisher "bat2exe"
 #define MyAppURL "https://github.com/ussdeveloper/bat2exe"
 #define MyAppExeName "bat2exe.exe"

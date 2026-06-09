@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.2.0] — 2026-06-09
+
+### Added
+- 🎨 **Native WPF Icon Picker** — choose from **120+ Material Design Icons** with custom color
+- `mdi_icons.go` — embedded MDI icon data (paths for 120+ icons)
+- `iconpicker.go` — PowerShell/WPF native window, icon generation, SVG rasterizer
+- `--no-pick-icon` flag — skip the icon picker and use the default icon
+- MDI icons attribution and license info in LICENSE and README
+
+### Changed
+- Icon picker now opens **automatically by default** during conversion
+- Replaced browser-based icon picker with native Windows WPF dark-themed window
+- Improved color palette with 12 presets and live preview
+- Updated installer version to 1.2.0
+
+### Dependencies
+- Added `golang.org/x/image` for SVG path rasterization
+
 ## [1.1.0] — 2026-06-09
 
 ### Added

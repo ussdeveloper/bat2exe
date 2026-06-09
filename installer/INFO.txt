@@ -1,15 +1,23 @@
-bat2exe v1.1.0
+bat2exe v1.2.0
 ====================
 
 Repository: https://github.com/ussdeveloper/bat2exe
-License: MIT
+License: MIT + Apache 2.0 (MDI Icons)
 
 Description:
   Convert .bat files with meta tags into standalone
   .exe executables. No runtime dependencies.
 
+New in v1.2.0:
+  🎨 Built-in Icon Picker (WPF) with 120+ MDI icons
+  🌈 Color selector with presets
+  ▶️ Icon picker opens automatically during conversion
+
 Quick start:
-  bat2exe script.bat         → script.exe
-  bat2exe -input a.bat -o a.exe
+  bat2exe script.bat         → script.exe (with icon picker)
+  bat2exe --no-pick-icon     → skip icon picker
 
 For help: bat2exe --help
+
+Material Design Icons by Pictogrammers (Apache 2.0)
+https://pictogrammers.com/

@@ -32,7 +32,7 @@ func main() {
 	output := flag.String("output", "", "Output .exe path (optional)")
 	printOnly := flag.Bool("print", false, "Only print generated Go code")
 	showVersion := flag.Bool("version", false, "Show version")
-	pickIcon := flag.Bool("pick-icon", false, "Open icon picker to choose MDI icon and color for the compiled exe")
+	noPickIcon := flag.Bool("no-pick-icon", false, "Skip icon picker and use default icon")
 	flag.Parse()
 
 	if *showVersion {
@@ -109,9 +109,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	// If --pick-icon, show icon picker and generate custom icon
+	// By default, show icon picker. Use --no-pick-icon to skip.
 	customIconPath := ""
-	if *pickIcon {
+	if !*noPickIcon {
 		fmt.Println("🎨 Opening icon picker...")
 		result, err := pickIconAndColor()
 		if err != nil {

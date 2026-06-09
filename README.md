@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 ![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)
+[![MDI License](https://img.shields.io/badge/MDI-Apache%202.0-orange.svg)](https://pictogrammers.com/license/)
 
 **bat2exe** converts Windows `.bat` batch files with meta tags into standalone `.exe` executables. No runtime dependencies — the resulting `.exe` is a self-contained Go program that runs on any Windows system.
 
@@ -13,7 +14,7 @@
 - 📋 **Audit** — `--audit` flag shows exactly what's inside any compiled `.exe`
 - 🔍 **Verbose** — `--verbose` flag shows step-by-step execution
 - 🖼️ **Custom icon** embedded in every build
-- 🎨 **Icon Picker** (`--pick-icon`) — choose from **120+ Material Design Icons** with custom color in your browser
+- 🎨 **Built-in Icon Picker** — choose from **120+ Material Design Icons** with custom color, opens automatically during conversion
 - 📦 **Installer** with context menu integration (right-click `.bat` → Convert to EXE)
 - ⚡ **No runtime** — standalone executable, zero dependencies
 
@@ -51,25 +52,56 @@ Meta tags must be on their own line:
 echo "Starting server on %server%:%port%"
 ```
 
-## Interactive Icon Picker (`--pick-icon`)
+## Interactive Icon Picker 🎨
 
-The `--pick-icon` flag opens a beautiful web UI in your browser where you can:
+The icon picker opens **automatically** during every conversion. A native Windows WPF window lets you:
 
 1. **Browse** 120+ Material Design Icons with live search
 2. **Pick** an icon by clicking on it
-3. **Choose** a color from presets or use the color picker
+3. **Choose** a color from presets or type a hex color
 4. Click **Apply** — the compiled `.exe` gets your custom icon!
 
 ```bash
-# Convert with icon picker
-bat2exe -input script.bat --pick-icon
+# Icon picker opens automatically
+bat2exe -input script.bat
 
-# Or with custom output name
-bat2exe -input script.bat -output app.exe --pick-icon
+# Skip icon picker (use default icon)
+bat2exe -input script.bat --no-pick-icon
 ```
 
 > **Note**: Requires `go-winres` for icon embedding.
 > Install: `go install github.com/tc-hib/go-winres@latest`
+
+### Icon Preview
+
+| Before | After |
+|--------|-------|
+| Default bat2exe icon | Your chosen MDI icon + color |
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file.
+
+### Material Design Icons
+
+**bat2exe** includes Material Design Icons by [Pictogrammers](https://pictogrammers.com/).
+
+The icons are licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
+```
+Material Design Icons by Pictogrammers
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
 
 ## Generated `.exe` Flags
 
@@ -102,7 +134,7 @@ app.exe myserver
 
 ### Option 1 — Installer (recommended)
 
-Download `bat2exe-setup-1.1.0.exe` from the [releases page](../../releases).
+Download `bat2exe-setup-1.2.0.exe` from the [releases page](../../releases).
 
 The installer:
 - Copies `bat2exe.exe` to `Program Files`
@@ -114,7 +146,7 @@ The installer:
 ```bash
 # Prerequisites: Go 1.21+
 go install github.com/tc-hib/go-winres@latest
-go-winres simply --icon winres/icon.png --product-name "bat2exe" --product-version "1.1.0" --file-version "1.1.0" --manifest cli
+go-winres simply --icon winres/icon.png --product-name "bat2exe" --product-version "1.2.0" --file-version "1.2.0" --manifest cli
 go build -o bat2exe.exe -ldflags "-s -w" .
 ```
 
