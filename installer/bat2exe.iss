@@ -4,7 +4,7 @@
 #define MyAppName "bat2exe"
 #define MyAppVersion "1.1.0"
 #define MyAppPublisher "bat2exe"
-#define MyAppURL "https://github.com/bat2exe"
+#define MyAppURL "https://github.com/ussdeveloper/bat2exe"
 #define MyAppExeName "bat2exe.exe"
 
 [Setup]
@@ -19,6 +19,7 @@ DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 LicenseFile=..\LICENSE
+InfoBeforeFile=.\INFO.txt
 OutputDir=.\output
 OutputBaseFilename=bat2exe-setup-{#MyAppVersion}
 Compression=lzma
@@ -38,8 +39,6 @@ Name: "contextmenu"; Description: "Add &Convert to EXE with bat2exe to .bat file
 Source: "..\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\README.md"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\test_simple.bat"; DestDir: "{app}\examples"; Flags: ignoreversion
-Source: "..\demo_param.bat"; DestDir: "{app}\examples"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

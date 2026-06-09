@@ -7,6 +7,7 @@
 *.test
 *.out
 *.txt
+!installer/INFO.txt
 *.log
 
 # Go workspace

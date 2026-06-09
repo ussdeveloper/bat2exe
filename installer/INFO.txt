@@ -1,0 +1,15 @@
+bat2exe v1.1.0
+====================
+
+Repository: https://github.com/ussdeveloper/bat2exe
+License: MIT
+
+Description:
+  Convert .bat files with meta tags into standalone
+  .exe executables. No runtime dependencies.
+
+Quick start:
+  bat2exe script.bat         → script.exe
+  bat2exe -input a.bat -o a.exe
+
+For help: bat2exe --help
