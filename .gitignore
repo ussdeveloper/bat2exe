@@ -1,0 +1,21 @@
+# Binaries — don't track test/random exes
+*.exe
+!bat2exe.exe
+!installer/output/bat2exe-setup-*.exe
+
+# Test binary, output files
+*.test
+*.out
+*.txt
+*.log
+
+# Go workspace
+go.work
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files
+tmp/
+temp/

@@ -1,0 +1,18 @@
+# Auto detect text files and handle line endings
+* text=auto
+
+# Go source
+*.go text diff=golang
+
+# Batch files
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Windows-specific
+*.iss text eol=crlf
+
+# Binary files
+*.exe binary
+*.png binary
+*.syso binary
+*.ico binary
